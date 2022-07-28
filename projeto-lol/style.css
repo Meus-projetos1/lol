@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+
+body{
+        background-color: #024059;
+
+}
+.sidebar{
+        width: 20% !important;
+        background-color: #026873 !important;
+        height: 100%;
+
+}
+#navlink{
+
+        background-color: #04BF8A !important ;
+}
+
+#nivel{
+
+    margin-left: 44% ;
+    font-size: 14;
+
+
+}
