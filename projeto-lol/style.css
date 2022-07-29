@@ -3,10 +3,11 @@
 
 body{
         background-color: #024059;
+        margin: 0;
 
 }
 .sidebar{
-        width: 20% !important;
+      
         background-color: #026873 !important;
         height: 100%;
 

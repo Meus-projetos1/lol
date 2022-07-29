@@ -1,0 +1,5 @@
+{
+    "require": {
+        "simplon/postgres": "^0.2.6"
+    }
+}

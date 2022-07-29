@@ -1,0 +1,59 @@
+{
+    "packages": [
+        {
+            "name": "simplon/postgres",
+            "version": "0.2.6",
+            "version_normalized": "0.2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fightbulc/simplon_postgres.git",
+                "reference": "8a9bb589e3785176c273c422f4c18ddff8c57607"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fightbulc/simplon_postgres/zipball/8a9bb589e3785176c273c422f4c18ddff8c57607",
+                "reference": "8a9bb589e3785176c273c422f4c18ddff8c57607",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": ">=5.3"
+            },
+            "time": "2015-02-15T19:45:15+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Simplon\\Postgres\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tino Ehrich",
+                    "email": "tino@bigpun.me",
+                    "role": "developer"
+                }
+            ],
+            "description": "Simplon PostgreSQL Library",
+            "homepage": "https://github.com/fightbulc/simplon_postgres",
+            "keywords": [
+                "db",
+                "manager",
+                "pdo",
+                "pgsql",
+                "postgres"
+            ],
+            "support": {
+                "issues": "https://github.com/fightbulc/simplon_postgres/issues",
+                "source": "https://github.com/fightbulc/simplon_postgres/tree/master"
+            },
+            "install-path": "../simplon/postgres"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

@@ -1,0 +1,69 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "e0f89a7703734c42258d75e9cb32e523",
+    "packages": [
+        {
+            "name": "simplon/postgres",
+            "version": "0.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fightbulc/simplon_postgres.git",
+                "reference": "8a9bb589e3785176c273c422f4c18ddff8c57607"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fightbulc/simplon_postgres/zipball/8a9bb589e3785176c273c422f4c18ddff8c57607",
+                "reference": "8a9bb589e3785176c273c422f4c18ddff8c57607",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Simplon\\Postgres\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tino Ehrich",
+                    "email": "tino@bigpun.me",
+                    "role": "developer"
+                }
+            ],
+            "description": "Simplon PostgreSQL Library",
+            "homepage": "https://github.com/fightbulc/simplon_postgres",
+            "keywords": [
+                "db",
+                "manager",
+                "pdo",
+                "pgsql",
+                "postgres"
+            ],
+            "support": {
+                "issues": "https://github.com/fightbulc/simplon_postgres/issues",
+                "source": "https://github.com/fightbulc/simplon_postgres/tree/master"
+            },
+            "time": "2015-02-15T19:45:15+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
