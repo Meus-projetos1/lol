@@ -69,7 +69,6 @@ function elo(ranqueada) {
     });
   }
 
-  debugger
   if ($("#elo-icone-flex").attr("src") == "") {
     semElo("flex");
   } 
@@ -94,10 +93,12 @@ function maestria(maestria) {
       `assets/maestria/lvl${maestria.championLevel}.png`
     );
   }
+  $("#maestriaPontos").text( `}`);
 }
 
 function campeao(campeao, maestria, invocador) {
   $("#icone").attr("src", `assets/profileicon/${invocador.profileIconId}.png`);
+  $("#nomeInvocador").text(invocador.name);
 
   for (var propriedade in campeao) {
     if (campeao[propriedade].key == maestria.championId) {
@@ -105,8 +106,8 @@ function campeao(campeao, maestria, invocador) {
         "src",
         `assets/campeao/${campeao[propriedade].name}_0.jpg`
       );
-      $(".card-title").text(campeao[propriedade].name);
-      $(".card-text").text(campeao[propriedade].title);
+      $(".card-title").html(campeao[propriedade].name + " " + campeao[propriedade].title +"</br>"+ 
+      `<p style="color:#9ca2aa";>— Pontos de Maestria #<span style="color: white"> ${maestria.championPoints.toLocaleString('pt-BR')}</span></p>`);
     }
   }
 }
