@@ -11,7 +11,7 @@ class Conect
     {
        
         
-        $SENHA_BANCO = $_ENV['SENHA_BANCO'];
+        
         
 
         $config = array(
@@ -20,7 +20,7 @@ class Conect
 
             'host'       => $_ENV['HOST_BANCO'],
             'user'       => $_ENV['USUARIO_BANCO'],
-            'password'   => "a58f09553777944aa07956ef67b2916f9794aa11c9a36583fbbb565df892e97e",
+            'password'   => $_ENV['SENHA_BANCO'],
             'database'   => $_ENV['NOME_BANCO'],
 
             // optional
