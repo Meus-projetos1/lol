@@ -1,6 +1,39 @@
-$("#button-addon2").click(function () {
-  var data = new FormData();
+$(document).ready(function () {
+  validaInput();
+});
+var valid = false;
 
+
+function validaInput() {
+  $("#nome").keyup(function () {
+    let nome = $("#nome").val();
+    let espacoFim = nome.substring(-1, 1).indexOf(" ") >= 0
+    let espacoComeco = nome.substring(nome.length - 1).indexOf(" ") >= 0
+  
+    if (espacoComeco || espacoFim ) {
+      $("#feedback").text("Tem espaços no começo ou no fim do nome");
+      $("#nome").addClass("is-invalid");
+      $("#button-addon2").attr("disabled","");
+      $("#nome").removeClass("is-valid");
+      valid = false;
+    } else {
+      $("#feedback").text("");
+      $("#nome").addClass("is-valid");
+      $("#button-addon2").removeAttr("disabled");
+      $("#nome").removeClass("is-invalid");
+      valid = true;
+    }
+    nome == '' ?  $("#button-addon2").attr("disabled", '') : ''
+              
+  
+  });
+}
+
+$("#button-addon2").click(function () {
+
+  if($("#nome").val() == "" || !valid ) return false;
+
+  var data = new FormData();
   data.append("nome", $("#nome").val());
   $("#load").css("display", "");
   $(".sr-only").text("Buscando");
@@ -14,6 +47,12 @@ $("#button-addon2").click(function () {
     contentType: false,
     processData: false,
     success: function (data, textStatus, jqXHR) {
+     
+      if(data.statusMsg != null){
+        $("#feedback").text(data.statusMsg );
+        $("#nome").addClass("is-invalid");
+        return false;
+      }
       maestria(data.maestria[0]);
       campeao(data.campeoes.data, data.maestria[0], data.invocador);
       elo(data.ranqueada);
@@ -21,10 +60,12 @@ $("#button-addon2").click(function () {
       removeload();
     },
     error: function (jqXHR, textStatus, errorThrown) {
+      $("#load").css("display", "");
       console.error(errorThrown);
       removeload();
     },
   }).done(function (data) {
+    $("#load").css("display", "");
     removeload();
   });
 });
@@ -35,7 +76,6 @@ function removeload() {
 }
 
 function elo(ranqueada) {
-  
   if (ranqueada.length > 0) {
     $(ranqueada).each(function (index, elo) {
       let eloAtual = caseElo(elo.tier);
@@ -71,13 +111,12 @@ function elo(ranqueada) {
 
   if ($("#elo-icone-flex").attr("src") == "") {
     semElo("flex");
-  } 
-   if ($("#elo-icone-solo").attr("src") == "") {
+  }
+  if ($("#elo-icone-solo").attr("src") == "") {
     semElo("solo");
   }
 }
 function semElo(fila) {
-
   $("#elo-" + fila).text("SEM RANKING");
   $("#vitorias-" + fila).html(
     'Vitorias : <span style="color: green;">0</span>'
@@ -93,7 +132,7 @@ function maestria(maestria) {
       `assets/maestria/lvl${maestria.championLevel}.png`
     );
   }
-  $("#maestriaPontos").text( `}`);
+  $("#maestriaPontos").text(`}`);
 }
 
 function campeao(campeao, maestria, invocador) {
@@ -106,8 +145,15 @@ function campeao(campeao, maestria, invocador) {
         "src",
         `assets/campeao/${campeao[propriedade].name}_0.jpg`
       );
-      $(".card-title").html(campeao[propriedade].name + " " + campeao[propriedade].title +"</br>"+ 
-      `<p style="color:#9ca2aa";>— Pontos de Maestria #<span style="color: white"> ${maestria.championPoints.toLocaleString('pt-BR')}</span></p>`);
+      $(".card-title").html(
+        campeao[propriedade].name +
+          " " +
+          campeao[propriedade].title +
+          "</br>" +
+          `<p style="color:#9ca2aa";>— Pontos de Maestria #<span style="color: white"> ${maestria.championPoints.toLocaleString(
+            "pt-BR"
+          )}</span></p>`
+      );
     }
   }
 }

@@ -27,89 +27,100 @@
   <div class="row mt-5">
     <div class="col-md-11 ">
       <div class="input-group mb-3">
-        <input id="nome" type="text" class="form-control" placeholder="Informe seu NICK no lol"
+        <input id="nome" type="text" class="form-control " placeholder="Informe seu NICK no lol"
           aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+        <button disabled class="btn btn-outline-secondary" type="button" id="button-addon2">
           <span id="load" style="display: none" class="spinner-border spinner-border-sm" role="status"
             aria-hidden="true">
           </span>
           <span class="sr-only">Buscar</span></button>
-      </div>
-      <div>
-      </div>
-      <div id="main" class="card mb-3" style="background-color:#3a4556; display: none;">
-        <div class="row g-0">
-          <div class="col-md-7">
-            <div>
-              <img id="icone" src="">
-              <img id="maestria" src="">
-            </div>
-            <img id="imgCampeao" src="" class="card-img-top" alt="...">
-            <div class="card-img-overlay " style="margin-top: 130px;">
-              <figure>
-                <blockquote class="blockquote">
-                  <h3 id="nomeInvocador" style="color: white"></h3>
-                </blockquote>
-                <figcaption class="blockquote-footer">
-                <cite class="card-title" style="color: white" title="Source Title"></cite>
-                
-                </figcaption>
-              </figure>
-              <!-- <p class="card-text" style="color: white"></p> -->
-            </div>
-          </div>
-          <div class="col-md-2" style="text-align: center;">
-            <div class="card-body">
-              <img style="width: 80%;" id="elo-icone-solo" src="">
-            </div>
-            <div class="card-body">
-              <img style="width: 80%;" id="elo-icone-flex" src="">
-            </div>
-          </div>
-          <div class="col-md-3" style="text-align: center;">
-            <div class="container" style="height: 100%;">
-              <div class="row align-items-start" style="height: 50%;">
-                <div class="col" style="margin-top: 9%;">
-                  <div>
-                    <h5 id='elo-solo' style="color: white"></h5>
-                  </div>
-                  <div>
-                    <label style="color: white">Raqueada Solo</label>
-                  </div>
-                  <div>
-                    <label id="vitorias-solo" style="color:#9ca2aa"></label>
-                  </div>
-                  <div>
-                    <label id="derrotas-solo" style="color:#9ca2aa"></label>
-                  </div>
-                </div>
+        <div id="feedback" class="invalid-feedback">
+        </div>
+        <div>
+          <small style="display: none;" id="errorNome" class="text-danger">
+          </small>
+        </div>
+        <div id="main" class="card mb-3" style="background-color:#3a4556; display: none; margin-top:20px">
+          <div class="row g-0">
+            <div class="col-md-7">
+              <div>
+                <img id="icone" src="">
+                <img id="maestria" src="">
               </div>
+              <img id="imgCampeao" src="" class="card-img-top" alt="...">
+              <div class="card-img-overlay " style="margin-top: 130px;">
+                <figure>
+                  <blockquote class="blockquote">
+                    <h3 id="nomeInvocador" style="color: white"></h3>
+                  </blockquote>
+                  <figcaption class="blockquote-footer">
+                    <cite class="card-title" style="color: white" title="Source Title"></cite>
 
-              <div class="row align-items-end" style="height: 30%;">
-                <div class="col" >
-                  <div>
-                    <h5 id='elo-flex' style="color: white"></h5>
+                  </figcaption>
+                </figure>
+
+              </div>
+            </div>
+            <div class="col-md-2" style="text-align: center;">
+              <div class="card-body">
+                <img style="width: 80%;" id="elo-icone-solo" src="">
+              </div>
+              <div class="card-body">
+                <img style="width: 80%;" id="elo-icone-flex" src="">
+              </div>
+            </div>
+            <div class="col-md-3" style="text-align: center;">
+              <div class="container" style="height: 100%;">
+                <div class="row align-items-start" style="height: 50%;">
+                  <div class="col" style="margin-top: 9%;">
+                    <div>
+                      <h5 id='elo-solo' style="color: white"></h5>
+                    </div>
+                    <div>
+                      <label style="color: white">Raqueada Solo</label>
+                    </div>
+                    <div>
+                      <label id="vitorias-solo" style="color:#9ca2aa"></label>
+                    </div>
+                    <div>
+                      <label id="derrotas-solo" style="color:#9ca2aa"></label>
+                    </div>
                   </div>
-                  <div>
-                    <label style="color: white">Raqueada flex</label>
-                  </div>
-                  <div>
-                    <label id="vitorias-flex" style="color:#9ca2aa"></label>
-                  </div>
-                  <div>
-                    <label id="derrotas-flex" style="color:#9ca2aa"></label>
+                </div>
+
+                <div class="row align-items-end" style="height: 30%;">
+                  <div class="col">
+                    <div>
+                      <h5 id='elo-flex' style="color: white"></h5>
+                    </div>
+                    <div>
+                      <label style="color: white">Raqueada flex</label>
+                    </div>
+                    <div>
+                      <label id="vitorias-flex" style="color:#9ca2aa"></label>
+                    </div>
+                    <div>
+                      <label id="derrotas-flex" style="color:#9ca2aa"></label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div></div>
+          <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button type="button" class="btn btn-success">Sim</button>
+            <button type="button" class="btn btn-danger">Não</button>
           </div>
         </div>
+        
+          
+       
       </div>
     </div>
-  </div>
 
-  <script src="./assets/jquery/jquery.js"></script>
-  <script src="home/js/index.js"></script>
+    <script src="./assets/jquery/jquery.js"></script>
+    <script src="home/js/index.js"></script>
 </body>
 
 </html>
