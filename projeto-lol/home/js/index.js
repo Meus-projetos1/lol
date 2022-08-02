@@ -2,6 +2,7 @@ $(document).ready(function () {
   validaInput();
 });
 var valid = false;
+var invocador = [];
 
 
 function validaInput() {
@@ -25,19 +26,23 @@ function validaInput() {
     }
     nome == '' ?  $("#button-addon2").attr("disabled", '') : ''
               
-  
   });
 }
 
+
+
+
 $("#button-addon2").click(function () {
 
+  invocador = [];
   if($("#nome").val() == "" || !valid ) return false;
 
   var data = new FormData();
+   
   data.append("nome", $("#nome").val());
   $("#load").css("display", "");
-  $(".sr-only").text("Buscando");
-
+  $('.sr-only').text('Buscando')
+ 
   $.ajax({
     url: "./routes/cadastroUsuario.php",
     type: "POST",
@@ -47,6 +52,9 @@ $("#button-addon2").click(function () {
     contentType: false,
     processData: false,
     success: function (data, textStatus, jqXHR) {
+
+      invocador.push(data.invocador.puuid);
+      invocador.push(data.invocador.name);
      
       if(data.statusMsg != null){
         $("#feedback").text(data.statusMsg );
@@ -70,10 +78,72 @@ $("#button-addon2").click(function () {
   });
 });
 
+$("#salvar").click(function(){
+
+  $('#buttons').css('display', 'none');
+  $('#loading').css('display', '');
+  $('.carregando').css('display', '');
+  $('#loading').find('h5').text('Cadastrando...');
+  
+  var data = new FormData();
+
+  data.append('puuid', invocador[0])
+  data.append('nome', invocador[1])
+
+  $.ajax({
+    url: "./routes/salvaInvocador.php",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (data, textStatus, jqXHR) {
+         
+        if (data.result == 0) {
+          $('#loading').find('h5').text('Cadastrado com sucesso!');
+          $('.carregando').css('display', 'none');
+          $('#check').css('display', '');
+        }else {
+          $('#loading').find('h5').text(`O Invocador "${data.result[0].nome}" já está cadastrado`)
+          $('.carregando').css('display', 'none');
+        }
+
+     
+
+      
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+     
+      console.error(errorThrown);
+      
+    },
+  }).done(function (data) {
+    
+    
+  });
+});
+
+
+
+
+$("#naoModal").click(function () {
+  $('.modal').removeClass('show');
+  $('.modal-backdrop').removeClass('show');
+})
+$("#Cadastrar").click(function () {
+  $('#buttons').css('display', '');
+  $('#loading').css('display', 'none');
+  $('#check').css('display', 'none');
+  
+})
+
 function removeload() {
   $("#load").css("display", "none");
   $(".sr-only").text("Buscar");
 }
+
+
 
 function elo(ranqueada) {
   if (ranqueada.length > 0) {

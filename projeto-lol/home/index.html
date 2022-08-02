@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
 </head>
 <style>
   #icone {
@@ -24,8 +25,9 @@
 </style>
 
 <body>
+
   <div class="row mt-5">
-    <div class="col-md-11 ">
+    <div id="here" class="col-md-11 ">
       <div class="input-group mb-3">
         <input id="nome" type="text" class="form-control " placeholder="Informe seu NICK no lol"
           aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -107,15 +109,49 @@
               </div>
             </div>
           </div>
-          <div></div>
           <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <button type="button" class="btn btn-success">Sim</button>
-            <button type="button" class="btn btn-danger">Não</button>
+            <button id="Cadastrar" type="button" class="btn btn-success" data-bs-toggle="modal"
+              data-bs-target="#exampleModalToggle">Cadastrar</button>
+
           </div>
         </div>
-        
-          
-       
+      </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+      tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">Esté é quem você procurava ?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-footer row justify-content-evenly" style="width: 89%; margin-left: 10%;">
+            <div id="buttons">
+              <button id="salvar" class="btn btn-success col-5">Sim, é!!</button>
+              <button id="naoModal" class="btn btn-danger col-5">Não é!!</button>
+            </div>
+            <div id='loading' style="text-align: center; display:none;  text-align: center;
+             margin-left: -10%;">
+              <h5>Cadastando...</h5>
+              <div class="carregando">
+                <div class="spinner-grow spinner-grow-sm text-success" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow spinner-grow-sm text-success" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow spinner-grow-sm text-success" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:none; margin-left: 66%" id="check">
+              <img style="width: 70px;" src="./assets/ranked-emblems/check.png">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
