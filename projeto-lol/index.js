@@ -1,6 +1,6 @@
 // $(document).ready(function() {
 
-   $('.col-9').load('./home/index.html', (responseTxt, statusTxt,
+   $('#indexPage').load('./home/index.html', (responseTxt, statusTxt,
       xhr) => {
       if (statusTxt == "success") {
     

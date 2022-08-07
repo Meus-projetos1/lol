@@ -29,9 +29,6 @@ function validaInput() {
   });
 }
 
-
-
-
 $("#button-addon2").click(function () {
 
   invocador = [];

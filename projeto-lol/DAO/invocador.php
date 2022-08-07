@@ -19,11 +19,21 @@ class Invocador
         return $query->insertInto($data, $sql);
     }
 
-    function consultaInvocador($puuid){
+    function consultaInvocadorPorPuuid($puuid){
         $query = new Query();
        
         $sql = 'SELECT * FROM "LOL"."invocadores" WHERE puuid = :puuid';
         $data = array('puuid' => "$puuid");
+        
+        return $query->select($sql, $data);
+
+    }
+
+    function consultaInvocador(){
+        $query = new Query();
+       
+        $sql = 'SELECT * FROM "LOL"."invocadores"';
+        $data = array();
         
         return $query->select($sql, $data);
 

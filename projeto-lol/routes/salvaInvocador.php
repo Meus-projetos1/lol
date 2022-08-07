@@ -8,7 +8,7 @@ try {
     $puuid = $_POST['puuid'];
 
 
-    $resultInvocador = (new Invocador())->consultaInvocador($puuid);
+    $resultInvocador = (new Invocador())->consultaInvocadorPorPuuid($puuid);
 
     if ($resultInvocador) {
 
