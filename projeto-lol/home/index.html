@@ -118,22 +118,29 @@
       </div>
     </div>
 
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-      tabindex="-1">
+    <div class="modal fade" data-bs-backdrop="static" id="exampleModalToggle" aria-hidden="true"
+      aria-labelledby="exampleModalToggleLabel" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel">Esté é quem você procurava ?</h5>
+            <h5 class="modal-title" id="tituloModal">Esté é quem você procurava ?</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <div class="modal-footer row justify-content-evenly" style="width: 89%; margin-left: 10%;">
+          <div class="modal-footer row justify-content-evenly" style="width: 81%; margin-left: 19%;">
             <div id="buttons">
-              <button id="salvar" class="btn btn-success col-5">Sim, é!!</button>
-              <button id="naoModal" class="btn btn-danger col-5">Não é!!</button>
+              <button id="salvar" class="btn btn-success col-8">Sim, é!!</button>
+
             </div>
             <div id='loading' style="text-align: center; display:none;  text-align: center;
-             margin-left: -10%;">
+             margin-left: -20%;">
+              <div id="resultados" style="display:none;">
+                <p>Data da ultimo Partida encontrada <b>"SOLO" : </b><br><span class="fs-4"></span></p>
+                <p>Quantidade de Partidas encontradas<b>"SOLO" : </b><br><span class="fs-4"></span></p>
+                <p>Data da ultimo Partida encontrada <b>"FLEX" : </b><br><span class="fs-4"></span></p>
+                <p>Quantidade de Partidas encontradas<b>"FLEX" : </b><br><span class="fs-4"></span></p>
+              </div>
+
               <h5>Cadastando...</h5>
               <div class="carregando">
                 <div class="spinner-grow spinner-grow-sm text-success" role="status">
@@ -147,7 +154,7 @@
                 </div>
               </div>
             </div>
-            <div style="display:none; margin-left: 66%" id="check">
+            <div style="display:none; margin-left: 45%" id="check">
               <img style="width: 70px;" src="./assets/ranked-emblems/check.png">
             </div>
           </div>

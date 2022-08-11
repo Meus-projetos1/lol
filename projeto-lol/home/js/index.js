@@ -3,18 +3,18 @@ $(document).ready(function () {
 });
 var valid = false;
 var invocador = [];
-
+var fila;
 
 function validaInput() {
   $("#nome").keyup(function () {
     let nome = $("#nome").val();
-    let espacoFim = nome.substring(-1, 1).indexOf(" ") >= 0
-    let espacoComeco = nome.substring(nome.length - 1).indexOf(" ") >= 0
-  
-    if (espacoComeco || espacoFim ) {
+    let espacoFim = nome.substring(-1, 1).indexOf(" ") >= 0;
+    let espacoComeco = nome.substring(nome.length - 1).indexOf(" ") >= 0;
+
+    if (espacoComeco || espacoFim) {
       $("#feedback").text("Tem espaços no começo ou no fim do nome");
       $("#nome").addClass("is-invalid");
-      $("#button-addon2").attr("disabled","");
+      $("#button-addon2").attr("disabled", "");
       $("#nome").removeClass("is-valid");
       valid = false;
     } else {
@@ -24,22 +24,20 @@ function validaInput() {
       $("#nome").removeClass("is-invalid");
       valid = true;
     }
-    nome == '' ?  $("#button-addon2").attr("disabled", '') : ''
-              
+    nome == "" ? $("#button-addon2").attr("disabled", "") : "";
   });
 }
 
 $("#button-addon2").click(function () {
-
   invocador = [];
-  if($("#nome").val() == "" || !valid ) return false;
+  if ($("#nome").val() == "" || !valid) return false;
 
   var data = new FormData();
-   
+
   data.append("nome", $("#nome").val());
   $("#load").css("display", "");
-  $('.sr-only').text('Buscando')
- 
+  $(".sr-only").text("Buscando");
+
   $.ajax({
     url: "./routes/cadastroUsuario.php",
     type: "POST",
@@ -49,12 +47,11 @@ $("#button-addon2").click(function () {
     contentType: false,
     processData: false,
     success: function (data, textStatus, jqXHR) {
-
       invocador.push(data.invocador.puuid);
       invocador.push(data.invocador.name);
-     
-      if(data.statusMsg != null){
-        $("#feedback").text(data.statusMsg );
+
+      if (data.statusMsg != null) {
+        $("#feedback").text(data.statusMsg);
         $("#nome").addClass("is-invalid");
         return false;
       }
@@ -75,17 +72,16 @@ $("#button-addon2").click(function () {
   });
 });
 
-$("#salvar").click(function(){
+$("#salvar").click(function () {
+  $("#buttons").css("display", "none");
+  $("#loading").css("display", "");
+  $(".carregando").css("display", "");
+  $("#loading").find("h5").text("Cadastrando...");
 
-  $('#buttons').css('display', 'none');
-  $('#loading').css('display', '');
-  $('.carregando').css('display', '');
-  $('#loading').find('h5').text('Cadastrando...');
-  
   var data = new FormData();
 
-  data.append('puuid', invocador[0])
-  data.append('nome', invocador[1])
+  data.append("puuid", invocador[0]);
+  data.append("nome", invocador[1]);
 
   $.ajax({
     url: "./routes/salvaInvocador.php",
@@ -96,51 +92,37 @@ $("#salvar").click(function(){
     contentType: false,
     processData: false,
     success: function (data, textStatus, jqXHR) {
-         
-        if (data.result == 0) {
-          $('#loading').find('h5').text('Cadastrado com sucesso!');
-          $('.carregando').css('display', 'none');
-          $('#check').css('display', '');
-        }else {
-          $('#loading').find('h5').text(`O Invocador "${data.result[0].nome}" já está cadastrado`)
-          $('.carregando').css('display', 'none');
-        }
+      if (data.result == 0) {
+        $("#loading").find("h5").text("Cadastrado com sucesso!");
+        $(".carregando").css("display", "none");
+        $("#check").css("display", "");
 
-     
-
-      
+        pegaData(invocador[0]);
+        salvaInfos(invocador[0], "420");
+      } else {
+        $("#loading")
+          .find("h5")
+          .text(`O Invocador "${data.result[0].nome}" já está cadastrado`);
+        $(".carregando").css("display", "none");
+      }
+      invocador = [];
     },
     error: function (jqXHR, textStatus, errorThrown) {
-     
       console.error(errorThrown);
-      
     },
-  }).done(function (data) {
-    
-    
-  });
+  }).done(function (data) {});
 });
 
-
-
-
-$("#naoModal").click(function () {
-  $('.modal').removeClass('show');
-  $('.modal-backdrop').removeClass('show');
-})
 $("#Cadastrar").click(function () {
-  $('#buttons').css('display', '');
-  $('#loading').css('display', 'none');
-  $('#check').css('display', 'none');
-  
-})
+  $("#buttons").css("display", "");
+  $("#loading").css("display", "none");
+  $("#check").css("display", "none");
+});
 
 function removeload() {
   $("#load").css("display", "none");
   $(".sr-only").text("Buscar");
 }
-
-
 
 function elo(ranqueada) {
   if (ranqueada.length > 0) {
@@ -257,4 +239,88 @@ function caseElo(elo) {
   }
 
   return eloTier;
+}
+var intervalo;
+function pegaData(puuid) {
+  let data = new FormData();
+
+  intervalo = setInterval(() => {
+    data.append("puuid", puuid);
+    $.ajax({
+      url: "./routes/retornaData.php",
+      type: "POST",
+      data: data,
+      dataType: "json",
+      cache: false,
+      contentType: false,
+      processData: false,
+      async: true,
+      success: function (data, textStatus, jqXHR) {
+        mostraResultados(data.result[0].max, data.result[0].count);
+
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+      },
+    }).done(function (data) {});
+  }, 5000);
+}
+
+function mostraResultados(data, quantidade) {
+  $("#tituloModal").html(
+    "O Sistema esta buscando suas partidas.<br>(Não atualizar a Pagina)"
+  );
+  $("#check").find("img").css("display", "none");
+  $(".btn-close").remove();
+  $("#loading").find('h5').css('display', 'none')
+  $("#resultados").css('display', '');
+
+  if (data != null) {
+    $($("#resultados").find('span').get(0)).text(data)
+    $($("#resultados").find('span').get(1)).text(quantidade)
+   
+  } else if (fila == "440"){
+    $($("#resultados").find('span').get(2)).text(data)
+    $($("#resultados").find('span').get(3)).text(quantidade)
+    
+  } 
+}
+
+function salvaInfos(puuid, fila) {
+  let data = new FormData();
+  data.append("puuid", puuid);
+  data.append("fila", fila);
+debugger
+
+
+
+
+
+  $.ajax({
+    url: "./routes/infosPartidas.php",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    cache: false,
+    contentType: false,
+    processData: false,
+    async: true,
+    success: function (data, textStatus, jqXHR) {
+      if (data.fila == "420") {
+        fila = "440";
+        salvaInfos(puuid, "440");
+      } else {
+        debugger
+        clearInterval(intervalo);
+        $("#tituloModal").html(
+          "Concluido!!! <br> Pode Atualizar a Pagina!!")
+      }
+      $(".btn-close").remove();
+      $("#check").find("img").css("display", "none");
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      debugger
+      console.error(errorThrown);
+    },
+  }).done(function (data) {});
 }

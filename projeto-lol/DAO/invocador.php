@@ -29,6 +29,17 @@ class Invocador
 
     }
 
+    function retornaData($puuid){
+        $query = new Query();
+       
+        $sql = 'select count(*),  max(datacriacaodojogo) from
+               "LOL".dadospartidas d  WHERE puuid = :puuid';
+        $data = array('puuid' => "$puuid");
+        
+        return $query->select($sql, $data);
+
+    }
+
     function consultaInvocador(){
         $query = new Query();
        
